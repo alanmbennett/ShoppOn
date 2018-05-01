@@ -1,0 +1,89 @@
+<?php
+  session_start();
+  include 'phpfiles/connect.php';
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShoppOn: Shopping Done Right</title>
+    <link href = "index.css" type= "text/css" rel= "stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="head">
+      <a href = "index.html"><img src="shoppOn.png" alt="ShoppOn logo" /></a>
+      <br />
+      <nav>
+        <aside>
+          <?php
+            if(null == $_SESSION["email"]) {
+            echo "<form action = \"phpfiles/login.php\" method =\"get\">
+              <input type = \"email\" name = \"email\" placeholder= \"Email Address\"
+                required = \"required\"/>
+                <input type = \"password\" name = \"password\" size = \"15\"
+                maxlength = \"30\" placeholder = \"Password\" required = \"required\" />
+                <input type = \"submit\" value = \"Login\" />
+                <p><a href = \"createaccount.html\"> Create Account</a></p>
+            </form>"; }
+            else {
+              echo "Welcome, ".$_SESSION["name"]."!"."
+              <form action =\"phpfiles/logout.php\" method=\"POST\">
+              <input type=\"submit\" name=\"submit\" value=\"Logout\" />
+              <a href = \"phpfiles/order.php\">Orders</a> |
+              <a href = \"account.html\">Account details</a> |
+              <a href = \"phpfiles/cart.php\">Cart</a>
+              </form>";
+            }
+            ?>
+        </aside>
+        <form action = "phpfiles/search.php">
+          <input type = "search" name = "search"
+            placeholder = "Search for a product" />
+          <input type = "submit" value = "Search" />
+        </form>
+        </nav>
+      </div>
+    </header>
+    <div id= "content">
+      </div>
+      <br />
+      <h1>Welcome to ShoppOn!</h1>
+      <p><b>Beat the line and shop online at ShoppOn!</b><br />ShoppOn offers multitudes of
+        items for your convenience. With two-day shipping from the day you order,
+        ShoppOn is really a no-brainer shopping experience! Shop with us today!
+      </p>
+      <?php
+        include 'phpfiles/connect.php';
+        session_start();
+        $connect = $_GET["con"];
+        if (!$connect){
+          echo "Connect Fail!";
+        }
+
+        $query = "SELECT \"name\", \"image\" FROM \"Products\"
+          ORDER BY random() LIMIT 3;";
+
+          $qur = pg_query($connect, $query);
+          if (!$qur){
+            echo "<br />query failed! <br />";
+          }
+
+          echo "<h1>Examples Of What You Can Buy On ShoppOn:</h1>";
+          echo "<table>";
+          echo "<tr>";
+          $i = 0;
+          while ($row = pg_fetch_row($qur))
+          {
+            echo "<td>";
+            echo "<img src=$row[1] alt=\"$row[0]\" width=\"250px\" height=\"250px\" />";
+            $name[i] = $row[0];
+            $i++;
+            echo "</td>";
+          }
+          echo "</tr>";
+          echo "</table><br /><br />";
+      ?>
+      <script type= "text/javascript" src = "index.js"></script>
+    </div>
+  </body>
+</html>

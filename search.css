@@ -1,0 +1,6 @@
+td, th {
+  border-bottom: 2px solid forestgreen;
+}
+.quantity {
+  width: 40px;
+}

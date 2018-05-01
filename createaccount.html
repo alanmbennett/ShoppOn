@@ -1,0 +1,59 @@
+<?php
+  session_start();
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShoppOn: Create your Account!</title>
+    <link href = "index.css" type= "text/css" rel= "stylesheet" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body>
+    <header>
+      <a href="index.html"><img src="shoppOn.png" alt="ShoppOn logo" /></a>
+      <nav>
+        <aside>
+            <form action = "phpfiles/login.php">
+              <input type = "email" name = "email" placeholder= "Email Address"
+                required = "required"/>
+                <input type = "password" name = "password" size = "15"
+                maxlength = "30" placeholder = "Password" required = "required" />
+                <input type = "submit" value = "Login" />
+            </form>
+        </aside>
+        <form action = "phpfiles/search.php">
+          <input type = "search" name = "search"
+            placeholder = "Search for a product" />
+          <input type = "submit" value = "Search" />
+        </form>
+      </nav>
+    </header>
+    <div id= "content">
+      <form action = "phpfiles/reg.php">
+        <p>Please fill out the below information to get started with your
+          ShoppOn account.</p>
+        <input type = "text" name = "name" size = "40"
+          maxlength = "50" placeholder = "Full name" required = "required" />
+        <br /><br />
+        <input type = "text" name ="addr" size = "40" placeholder = "Shipping Address"
+        required = "required" /><br /><br />
+        <input type = "email" name = "email" size = "40" placeholder = "Email"
+        required = "required" /><br /><br />
+        <input type = "password" name = "password" id = "password" size = "19"
+          maxlength = "30" placeholder = "Password"
+          required = "required" onkeyup = "checkPassword()" />
+        <input type = "password" name = "confirmpassword" id = "confirmpassword"
+          placeholder = "Confirm password"
+          size = "19" maxlength = "30" required = "required"
+          onkeyup = "checkPassword()" />
+        <span id= "password_message"></span><br /><br />
+        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+        data-callback="captchaFilled" data-expired-callback="captchaExpired"></div>
+        <br/>
+        <input type = "submit" value = "Create Account" />
+        <span id = "submit_message"></span>
+      </form>
+      <script type= "text/javascript" src = "createaccount.js"></script>
+    </div>
+  </body>
+</html>
